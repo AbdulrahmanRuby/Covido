@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+
+<section class="page-header">
+<div class="container">
+    <h2>FAQs</h2>
+    <ul class="thm-breadcrumb list-unstyled">
+        <li><a href="{% url "home:home" %}">Home</a></li>
+        <li><span>FAQs</span></li>
+    </ul><!-- /.thm-breadcrumb -->
+</div><!-- /.container -->
+</section><!-- /.page-header -->
+
+<section class="faq-one faq-one__faq-page">
+    <div class="container">
+        <div class="block-title text-center">
+            <p>Frequently Asked Questions</p>
+            <h3>Have any question?</h3>
+        </div><!-- /.block-title -->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accrodion-grp" data-grp-name="faq-one-accrodion">
+                    {% for faq in faqs_first_half %}
+                    <div class="accrodion">
+                        <div class="accrodion-title">
+                            <h4>{{ faq.question }}</h4>
+                        </div>
+                        <div class="accrodion-content">
+                            <div class="inner">
+                                <p>{{ faq.answer }}</p>
+                            </div><!-- /.inner -->
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6">
+                <div class="accrodion-grp" data-grp-name="faq-two-accrodion">
+                    {% for faq in faqs_second_half %}
+                    <div class="accrodion ">
+                        <div class="accrodion-title">
+                            <h4>{{ faq.question }}</h4>
+                        </div>
+                        <div class="accrodion-content">
+                            <div class="inner">
+                                <p>{{ faq.answer }}</p>
+                            </div><!-- /.inner -->
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.faq-one -->
+
+  
+
+{% include "contact_form.html" %}
+
+
+
+{% endblock body %}

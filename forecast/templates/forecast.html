@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+
+
+{% block body %}
+
+<section class="page-header">
+  <div class="container">
+      <h2>Forecast</h2>
+      <ul class="thm-breadcrumb list-unstyled">
+          <li><a href="{% url "home:home" %}">Home</a></li>
+          <li><span>Forecast</span></li>
+      </ul><!-- /.thm-breadcrumb -->
+  </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+<section class="faq-one faq-one__faq-page">
+  <div class="container">
+    <h2 style="text-align: center; font-weight: bold; color: black;">Total Cases : {{total_cases}}</h2>
+    <h2 style="text-align: center; font-weight: bold; color: black;">Total Recovered: {{recovered}}</h2>
+    <h2 style="text-align: center; font-weight: bold; color: black;">TotalDeath: {{death}}</h2>
+    <div class="row" width="2500">
+        <div class="col-md-6" width="2300">
+          <h1>Total Coronavirus Cases in Egypt</h1>
+          <canvas id="myChart" height="300" width="400"></canvas>
+        </div>
+    
+  </div><!-- /.container -->
+</section><!-- /.faq-one -->
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+  var  ctx = document.getElementById('myChart').getContext('2d');
+
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Total Cases', 'Total Recovered', 'Total Death'],
+      datasets: [
+        {
+          label: 'Confirmed Cases',
+          backgroundColor: 'rgba(153, 102, 255, 1)',
+          data: [{{total_cases}}, 0, 0], // Total Cases value for the first label
+          fill: false,
+          borderWidth: 1
+        },
+        {
+          label: 'Recovered Cases',
+          backgroundColor: 'rgba(75, 192, 192, 1)',
+          data: [0, {{recovered}}, 0], // Total Recovered value for the second label
+          fill: false,
+          borderWidth: 1
+        },
+        {
+          label: 'Total Deaths',
+          backgroundColor: 'rgba(54, 162, 235, 1)',
+          data: [0, 0, {{death}}], // Total Deaths value for the third label
+          fill: false,
+          borderWidth: 1,
+          barThickness: 2000
+        },
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+ 
+  });
+  
+
+</script>
+
+
+{% endblock body %}
